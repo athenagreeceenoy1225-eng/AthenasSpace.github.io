@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <title>Athena's Blog</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Times New Roman", Times, serif;
+      color: black;
+      background: url("szaaaaaaaaaaa.jpg") no-repeat center center fixed;
+      background-size: cover;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: -1;
+    }
+    nav {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 6px 10px;
+      display: flex;
+      gap: 10px;
+      border-radius: 10px;
+      z-index: 1000;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: black;
+      font-weight: bold;
+      font-family: "Times New Roman";
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    nav button:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+section {
+  display: none;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: opacity 0.8s ease, transform 0.8s ease; 
+  min-height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+section.active {
+  display: flex;
+  animation: slowPopUp 0.8s forwards; 
+}
+
+
+@keyframes slowPopUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+    .card {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-family: "Times New Roman";
+      margin: 30px auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 700px;
+      min-height: 220px;
+      padding: 28px;
+      font-size: 1.2rem;
+    }
+    .card img {
+      max-width: 85%;
+      height: auto;
+    }
+.social-card {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 6px auto;
+  max-width: 320px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+    .sidebar-img img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .image-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .image-overlay-card {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .image-overlay-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .overlay-text {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 8px;
+      text-align: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .image-overlay-card:hover .overlay-text {
+      opacity: 1;
+    }
+    .image-overlay-card:hover img {
+      transform: scale(1.05);
+    }
+    video.content-video {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+    footer {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+      font-family: "Times New Roman";
+      text-align: center;
+      padding: 16px;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 40px;
+    }
+  
+@media (max-width: 768px) {
+
+  nav {
+    top: 10px;
+    right: 10px;
+    padding: 6px;
+    gap: 6px;
+  }
+
+  nav button {
+    font-size: 12px;
+    padding: 6px 8px;
+    min-height: 36px;
+
+  }
+
+  section {
+    padding: 16px;
+  }
+
+  .card {
+    max-width: 95%;
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  .card img {
+    max-width: 100%;
+  }
+
+  
+  .image-gallery {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .image-overlay-card {
+    width: 100%;
+  }
+
+  video.content-video {
+    width: 100%;
+  }
+  img {
+  max-width: 100%;
+  height: auto;
+}
+
+}
+
+  </style>
+</head>
+<body>
+
+  <nav>
+  <button data-target="home">Home</button>
+  <button data-target="about">About</button>
+  <button data-target="school">School</button>
+  <button data-target="hobbies">Hobbies</button>
+  <button data-target="ambition">Ambition</button> 
+  <button data-target="people">People</button> 
+  <button data-target="socials">Socials</button>
+</nav>
+
+
+  <section id="home" class="active">
+    <div class="card">
+      <video autoplay muted loop playsinline class="content-video">
+        <source src="Welcome to Athena’s Blog (1).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <div class="container">
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="card sidebar-layout">
+        <div class="text">
+          <p style="font-size:30px;">
+            <i>Hi! I'm Athena Greece A. Enoy, and right now you are about to witness a glimpse into the complexities that define me.</i>
+          </p>
+        </div>
+        <div class="sidebar-img"><img src="11.jpg" alt="Athena's profile photo" /></div>
+      </div>
+
+      <div class="card">
+        <p><i>I was born on December 25, 2006. Yes I was born on Christmas Day that is why Christmas is my fav holiday.</i></p>
+      <div class="image-gallery" style="display: flex; justify-content: center; gap: 10px; flex-wrap: nowrap;">
+  <div class="image-overlay-card small-overlay">
+    <img src="8.jpg" alt="child me">
+    <span class="overlay-text">always have been goofy</span>
+  </div>
+  <div class="image-overlay-card small-overlay">
+    <img src="4.jpg" alt="child me">
+    <span class="overlay-text">my younger self</span>
+  </div>
+  <div class="image-overlay-card small-overlay">
+    <img src="16.jpg" alt="child me">
+    <span class="overlay-text">o(˶˃ ᵕ ˂˶)o</span>
+  </div>
+</div>
+
+      <div class="card"> 
+        <p><i>I live in Purok 13 Timoga Buru-un Iligan City</i></p>
+        <div class="image-overlay-card " style=width:100%;>
+          <img src="loc.jpg" alt="My Lolo's Restaurant">
+          <span class="overlay-text">My Lolo's Restaurant</span></div>
+      </div>
+
+<div class="card">
+  <p><i>Fun fact, I actually joined my first ever pageant here in Timoga. And by Gods grace I garnered the First runner up place (,,>﹏<,,)</i></p>
+  <div class="image-gallery" style="display: flex; justify-content: center; gap: 10px; flex-wrap: nowrap;">
+    <div class="image-overlay-card small-overlay"><img src="6.jpg" alt="pageant photo"></div>
+    <div class="image-overlay-card small-overlay"><img src="7.jpg" alt="pageant photo"></div>
+    <div class="image-overlay-card small-overlay"><img src="9.jpg" alt="pageant photo"></div>
+  </div>
+</div>
+
+
+<div class="card">
+  <p><i>And now, for my third pageant I stepped onto a bigger stage. I am now The Miss Buru-un 2025</i></p>
+  <div class="image-gallery" style="display: flex; justify-content: center; gap: 10px; flex-wrap: nowrap;">
+    <div class="image-overlay-card small-overlay">
+      <img src="18.jpg" alt="pageant photo">
+      <span class="overlay-text">MY</span>
+    </div>
+    <div class="image-overlay-card small-overlay">
+      <img src="17.jpg" alt="winning moment">
+      <span class="overlay-text">WINNING</span>
+    </div>
+    <div class="image-overlay-card small-overlay">
+      <img src="19.jpg" alt="child me">
+      <span class="overlay-text"> MOMENT</span>
+    </div>
+  </div>
+</div>
+
+
+            <div class="card">
+  <p><i>Meet my Mom and Dad. (We don’t have pictures together because they separated when I was young)</i></p>
+  <div class="image-gallery" style="display: flex; justify-content: center; gap: 10px; flex-wrap: nowrap;">
+    <div class="image-overlay-card small-overlay">
+      <img src="10.jpg" alt="mom photo">
+      <span class="overlay-text">Honey Mae G. Aguanta</span>
+    </div>
+
+    <div class="image-overlay-card small-overlay">
+      <img src="3.jpg" alt="dad photo">
+      <span class="overlay-text">Karl Michael A. Enoy</span>
+    </div>
+  </div>
+</div>
+
+
+     <div class="card"><p><i>My favorite color!!!</i></p>
+        <div class="image-overlay-card " style="width:100%">
+          <img src="blue.jpg" alt="fav color">
+          <span class="overlay-text">All shades of blue</span></div>
+      </div>
+    </div>
+       </section>
+
+   <section id="school">
+  <h2><i>My Educational Path</i></h2>
+  <div class="card">
+    <p><i>In the Elementary I studied at Sgt. Miguel Canoy Memorial Central School.</i></p>
+    <div class="image-overlay-card">
+      <img src="elem.jpg" alt="my elementary self" />
+      <span class="overlay-text">Elementary Years</span>
+    </div>
+    <div class="card">
+    <p><i>When I was in Grade 5 I joined my second pageant, the MAPEHSIONISTA. I got the 2nd runner up place.</i></p>
+    <div class="image-overlay-card ">
+      <img src="mapeh.jpg" alt="MAPEH Pageant" />
+      <span class="overlay-text">MAPEHSIONISTA 2018</span>
+    </div>
+    </div>
+    </div>
+
+  <div class="card">
+    <p><i>In high school and senior high school I studied at Our Lady of Perpetual Help Academy</i></p>
+    <div class="image-overlay-card" style="width:100%;">
+      <img src="hs.jpg" alt="hs" />
+      <span class="overlay-text">High School Years</span>
+    </div>
+  </div>
+
+  
+  <div class="card">
+    <p><i>Now, in college I am studying at Mindanao State University Iligan Institute Technology</i></p>
+    <div class="image-overlay-card" style="width:100%;">
+      <img src="msu.jpg" alt="College life" />
+      <span class="overlay-text">Dakilang Pamantasan</span>
+    </div>
+  </div>
+</section>
+
+    <section id="ambition">
+  <h2><i>My Ambition</i></h2>
+  <div class="card">
+    <p><i>From a young age I've always wanted to be a nurse, and as I've grown older I still wanted to be a nurse... although life has other plans for me.</i></p>
+    <div class="image-overlay-card" style="width:50%; display:flex; justify-content:center; align-items:center;">
+      <img src="nurse (2).jpg" alt="nurse" />
+      <span class="overlay-text"> A dream I can't reach</span>
+    </div>
+  </div>
+
+  <div class="card">
+  <p>
+    <i>
+      As I have grown older, I started to realize that not all dreams are meant to come true. 
+      When I was younger, I believed that every dream I had could be reached if I just worked hard enough. 
+      But as time passed, I began to see that some dreams are too far, too heavy, or simply not meant for me. 
+      At first, this thought made me sad because I felt like I was giving up. 
+      But now, I understand that accepting this truth does not mean failure,it means growth.
+      <br><br>
+      Life is not always about chasing the biggest or brightest dream. 
+      Sometimes, it is about finding peace in the small things that make us happy. 
+      With this new understanding, I have found a different kind of determination. 
+      I no longer want to measure my worth by how close I get to impossible dreams. 
+      Instead, I want to pursue anything that brings me joy, no matter how simple or ordinary it may seem. 
+      Happiness, after all, is the greatest success anyone can have.
+      <br><br>
+      All I truly want is to be at ease wherever life may take me. 
+      I want to wake up each day with a calm heart, knowing that I am living a life that feels right for me. 
+      I hope that the future version of myself will look back and feel proud not because I achieved every dream, 
+      but because I chose to live with contentment. 
+      I hope she smiles, knowing that she followed what made her happy, even if it was not the path others expected.
+      <br><br>
+      Dreams may sometimes remain as dreams, but that does not mean life loses its meaning. 
+      What matters most is how we choose to live in the present, how we embrace the journey, 
+      and how we find joy in the places where we stand. 
+      My wish for myself is simple: to be happy, to be content, and to be at peace with whatever life gives me. 
+      If I can achieve that, then I will know that I have lived well.
+    </i>
+  </p>
+  <i class="fas fa-researchgate"></i>
+</div>
+</div>
+</section>
+
+<section id="hobbies">
+  <h2><i>Things I love doing</i></h2>
+
+  <div class="card">
+    <p><i>When I was in Elementary I fell in love with Volleyball</i></p>
+    <div class="image-overlay-card" style="width: 100%; display:flex; justify-content:center; align-items:center;">
+      <img src="volleyball.jpg" alt="ML" />
+      <span class="overlay-text"> I'm a Libero hehe</span>
+      </div>
+      </div>
+
+  <div class="card">
+    <p><i>MOBILE LEGENDS!!! actually started playing it in SHS and now I'm addicted</i></p>
+    <div class="image-overlay-card" style="width:100%; display:flex; justify-content:center; align-items:center;">
+      <img src="ML.jpg" alt="ML" />
+      <span class="overlay-text"> Stress Reliever</span>
+    </div>
+
+    <div class="card">
+      <p><i> 
+        I also love listening to music while cleaning, it is my way to ease my burdens. Because if my mind is a mess then I would clean my surrounding to help me cool off my mind</i></p>
+    </div>
+    <div class="card">
+      <p><i> I am not a writer myself, but whenever I feel down I would write the things that are bothering me in my diary. It helps me think straight on how I can fix the obstacles that I am facing.</i></p>
+    </div>
+  
+<div class="card">
+        <p><i>I really loveeeeeeeeeeeeee travelling</i></p>
+  <div class="image-gallery" style="display: flex; justify-content: center; gap: 10px; flex-wrap: nowrap;">
+    <div class="image-overlay-card small-overlay">
+      <img src="s.jpg" alt="pageant photo">
+      <span class="overlay-text"></span>
+    </div>
+    <div class="image-overlay-card small-overlay">
+      <img src="r.jpg" alt="winning moment">
+      <span class="overlay-text"></span>
+    </div>
+    <div class="image-overlay-card small-overlay">
+      <img src="a.jpg" alt="child me">
+      <span class="overlay-text"> </span>
+    </div>
+    </div>
+     <div class="image-gallery" style="display: flex; justify-content: center; gap: 10px; flex-wrap: nowrap;">
+        <div class="image-overlay-card small-overlay">
+      <img src="v.jpg" alt="pageant photo">
+      <span class="overlay-text"></span>
+    </div>
+    <div class="image-overlay-card small-overlay">
+      <img src="e.jpg" alt="winning moment">
+      <span class="overlay-text"></span>
+    </div>
+     <div class="image-overlay-card small-overlay">
+      <img src="t.jpg" alt="child me">
+      <span class="overlay-text"> </span>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<section id="people">
+  <h2><i>Important People in My Life</i></h2>
+  <div class="card"><p><i>Of course my family</i></p>
+    <div class="image-overlay-card" style="width:100%; display:flex; justify-content:center; align-items:center;">
+      <img src="fam.jpg" alt="my family" />
+      <span class="overlay-text"> "Home isn't where you're from, it's where you find light when all grows dark." </span>
+    </div>
+    </div>
+     <div class="card"><p><i>Specially my Lola and Lolo, because they were the ones who raised me when my parents separated</i></p>
+    <div class="image-overlay-card" style="width:50%; display:flex; justify-content:center; align-items:center;">
+      <img src="grand2.jpg" alt="my family" />
+      <span class="overlay-text"> The ones who raised me</span>
+    </div>
+    </div>
+     <div class="card"><p><i>and The Brad Angels</i> </p>
+    <div class="image-overlay-card" style="width:100%; display:flex; justify-content:center; align-items:center;">
+      <img src="cousin.jpg" alt="my family" />
+      <span class="overlay-text"> My chaotic cousins</span>
+    </div>
+    </div>
+     <div class="card"><p><i>My friendgroup in shs</i> </p>
+    <div class="image-overlay-card" style="width:100%; display:flex; justify-content:center; align-items:center;">
+      <img src="ronda.jpg" alt="my family" />
+      <span class="overlay-text"> RONDA PATROL </span>
+    </div>
+  </div>
+  <div class="card"><p><i>and lastly.....The loml </i> </p>
+    <div class="image-overlay-card" style="width:100%; display:flex; justify-content:center; align-items:center;">
+      <img src="bf.jpg" alt="my family" />
+      <span class="overlay-text"> my safe place</span>
+    </div>
+  </div>
+
+</section>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<style>
+  a.gmail-link, a.fb-link, a.ig-link, a.dump-link, a.tt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+
+  a.gmail-link { background-color: #d93025; }
+  a.gmail-link:hover { background-color: #b1271c; }
+
+  a.fb-link { background-color: #1877f2; }
+  a.fb-link:hover { background-color: #145dbf; }
+
+  a.ig-link {
+    background: radial-gradient(circle at 30% 107%, 
+      #fdf497 0%, #fdf497 5%, 
+      #fd5949 45%, #d6249f 60%, 
+      #285AEB 90%);
+  }
+  a.ig-link:hover { opacity: 0.85; }
+
+  a.dump-link {
+    background: radial-gradient(circle at 30% 107%, 
+      #fdf497 0%, #fdf497 5%, 
+      #fd5949 45%, #d6249f 60%, 
+      #285AEB 90%);
+  }
+  a.dump-link:hover { opacity: 0.85; }
+
+  a.tt-link { background-color: #000000; }
+  a.tt-link:hover { background-color: #333333; }
+
+  ion-icon { font-size: 20px; }
+</style>
+
+
+<section id="socials">
+  <h2>My Socials</h2>
+
+
+  <div class="card">
+  <p><i>Here is my Gmail account</i></p>
+  <a href="mailto:athenagreeceenoy1225@gmail.com" class="gmail-link">
+    <ion-icon name="mail-outline"></ion-icon>
+    athenagreeceenoy1225@gmail.com
+  </a>
+</div>
+
+<div class="card">
+  <p><i>Here is my Facebook account</i></p>
+  <a href="https://facebook.com/athenagreece.enoy" target="_blank" class="fb-link">
+    <ion-icon name="logo-facebook"></ion-icon>
+    Athena Greece
+  </a>
+</div>
+
+<div class="card">
+  <p><i>Here is my Instagram account</i></p>
+  <a href="https://instagram.com/athenuh_" target="_blank" class="ig-link">
+    <ion-icon name="logo-instagram"></ion-icon>
+    Athenuh_
+  </a>
+</div>
+
+<div class="card">
+  <p><i>Here is my Dump account</i></p>
+  <a href="https://instagram.com/greaassseee_" target="_blank" class="dump-link">
+    <ion-icon name="logo-instagram"></ion-icon>
+    greaassseee_
+  </a>
+</div>
+
+<div class="card">
+  <p><i>Here is my TikTok account</i></p>
+  <a href="https://www.tiktok.com/@_thngrc" target="_blank" class="tt-link">
+    <ion-icon name="logo-tiktok"></ion-icon>
+    sobranglathena
+  </a>
+</div>
+</section>
+
+  <footer>
+    <p>&copy; 2025 Athena's Blog</p>
+  </footer>
+<script>
+function showSection(id) {
+  document.querySelectorAll("section").forEach(sec => {
+    sec.classList.remove("active");
+    sec.style.animation = 'none'; 
+  });
+
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.add("active");
+    target.style.animation = 'slowPopUp 0.8s forwards'; 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const targetId = btn.getAttribute("data-target");
+    showSection(targetId);
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => showSection("home"));
+</script>
+
+
+</html>
